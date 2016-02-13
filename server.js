@@ -1,6 +1,10 @@
 var express = require('express');
 var overRide = require('method-override');
 var bodyParser = require('body-parser');
-var PORT = process.env.NODE_ENV || 6669;
+var PORT = process.env.NODE_ENV || 3306;
+var app = express();
+app.engine('handlebars', expressHandlebars({defaultLayout: 'noteslayout'}));
+app.set('view engine', 'handlebars');
+app.use(bodyParser.urlencoded({extended: false}));
 var connection = require('./config.js').localConnect();
 connection.connect();
