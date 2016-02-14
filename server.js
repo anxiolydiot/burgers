@@ -9,5 +9,11 @@ app.engine('handlebars', expressHandlebars({defaultLayout: 'noteslayout'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({extended: false}));
 
-connection.connect();
+//routes
+var routes = require('./controllers/burgers_controller.js');
+app.use('/', routes);
+app.use('/create', routes);
+app.use('/delete', routes);
 
+//listen on 3306
+app.listen(PORT);
