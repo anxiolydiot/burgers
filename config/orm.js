@@ -1,10 +1,10 @@
-exports = {
-
 var connection = require('../config/connection.js');
+
+exports = {
 
 var orm = {
 
-var showAll : function(a,b){
+var showAll : function(b){
   var currentTableData = 'SELECT * FROM burger_table;';
   connection.query(currentTableData, function(err,result){
     if (err) throw err;
@@ -12,55 +12,24 @@ var showAll : function(a,b){
   });
 },
 
- var addsBurger: function(tableInput, nameInput, activeInput, cb) {  
-      var s = 'INSERT INTO ' + tableInput + ' (name, active, visit_count) VALUES (?, ?, ?)';
-      connection.query(s, [nameInput, activeInput, 0], function(err, result) {
+ var addsBurger: function(a,b) {  
+      var x = 'INSERT INTO burger_table (burger_name, devoured) VALUES (?, ?);';
+      connection.query(x, [a, false], function(err, result) {
       if (err) throw err;
-      cb(result);
+      b(result);
   });
 },
 
-
-
-
-// selectAll: function(tableInput, cb) {
-//         var s = 'SELECT * FROM ' + tableInput + ';';
-//         connection.query(s, function(err, result) {
-//             if (err) throw err;
-//             cb(result);
-// }
-
-
-
-// var newBurger : function(){
-//   /// user picks burger <- as in write code for this event 
-//    var mySQLQuery = "INSERT INTO burgers_db (burger_name) VALUES ('" + req.body.burgerdata + "');"; //burger data comes from the hhandlebars view
-//    connection.query(mySQLQuery, function(err) {
-//     if (err) {
-//       throw err
-//     }
-//     res.redirect('/');
-//   });
-// },
-
-
-// var devoured : function(){
-//     /// user eats burger <- as in write code for this event 
-//    var mySQLQuery = "delete from burgers_db (burger_name) VALUES ('" + req.body.eatdata + "')"; //burger data comes from the hhandlebars view
-//    connection.query(mySQLQuery, function(err) {
-//     if (err) {
-//       throw err
-//     }
-//     res.redirect('/');
-//   });
-// });
-
-
-// };
-
-selectAll: function(tableInput, cb) {
-        var s = 'SELECT * FROM ' + tableInput + ';';
-        connection.query(s, function(err, result) {
-            if (err) throw err;
-            cb(result);
+ var devoured : function(a,b){
+  var x = 'UPDATE burger_table SET devoured=true WHERE burger_name=?';
+  connection.query(x, [a]), function(err, result){
+    if (err) throw err;
+    b(result);
+  });
+  }
 }
+
+    
+
+module.exports = orm;
+ 
