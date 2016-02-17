@@ -2,7 +2,7 @@ var orm = require("../config/orm.js");
 
 
 var burgerActions = {
- showCurrent : function(a){
+showCurrent : function(a){
   orm.showAll(a);
 },
 addABurger: function(burger_name,a){
@@ -16,4 +16,4 @@ eatsBurger: function(burger_name,a){
 
 };
 
-modeule.exports = burgerActions;
+module.exports = burgerActions;

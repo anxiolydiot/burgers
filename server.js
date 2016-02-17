@@ -3,14 +3,14 @@ var overRide = require('method-override');
 var bodyParser = require('body-parser');
 var expressHandlebars = require('express-handlebars');
 var router = require('./controllers/burgers_controller.js');
-var connection = require('./connection.js').localConnect();
+// var connection = require('../connection.js');
 var PORT = process.env.NODE_ENV || 3306;
 var app = express();
 app.engine('handlebars', expressHandlebars({defaultLayout: 'noteslayout'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({extended: false}));
-
-router.burgers_controller(app);
+app.use("/static", express.static("public"));
+// router.burgers_controller(app);
 //routes
 var routes = require('./controllers/burgers_controller.js');
 app.use('/', routes);
