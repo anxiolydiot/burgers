@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var expressHandlebars = require('express-handlebars');
 var router = require('./controllers/burgers_controller.js');
 // var connection = require('../connection.js');
-var PORT = process.env.NODE_ENV || 3306;
+var PORT = process.env.NODE_ENV || 8080;
 var app = express();
 app.engine('handlebars', expressHandlebars({defaultLayout: 'noteslayout'}));
 app.set('view engine', 'handlebars');
