@@ -4,9 +4,10 @@ var bodyParser = require('body-parser');
 var expressHandlebars = require('express-handlebars');
 var router = require('./controllers/burgers_controller.js');
 // var connection = require('../connection.js');
-var PORT = process.env.NODE_ENV || 8080;
+var PORT = process.env.NODE_ENV || 3000;
 var app = express();
-app.engine('handlebars', expressHandlebars({defaultLayout: 'noteslayout'}));
+app.use(overRide('_method'));
+app.engine('handlebars', expressHandlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use("/static", express.static("public"));
@@ -18,4 +19,6 @@ app.use('/new', routes);
 app.use('/eaten', routes);
 
 //listen on 3306
-app.listen(PORT);
+app.listen(PORT, function(){
+  console.log('Listening on %s', PORT);
+});
